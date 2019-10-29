@@ -6,13 +6,12 @@ public class Snake : MonoBehaviour
 {
     [SerializeField] private float RotationSpeed = 250f;
     [SerializeField] private GameObject TailPrefab;
-    private float speed = 3f; 
-    public float Speed => speed;
+    [SerializeField] private float speed = 3f;
     private float z_offset = 0.5f;
 
-    public List<GameObject> tailObjects = new List<GameObject>();
+    private List<GameObject> tailObjects = new List<GameObject>();
 
-    [SerializeField]private Text scoreText;
+    [SerializeField] private Text scoreText;
     private int score;
 
     void Start()
@@ -38,8 +37,24 @@ public class Snake : MonoBehaviour
     public void AddTail()
     {
         score++;
+
         Vector3 newTailPos = tailObjects[tailObjects.Count - 1].transform.position;
         newTailPos.z -= z_offset;
-        tailObjects.Add(GameObject.Instantiate(TailPrefab, newTailPos, Quaternion.identity));
+        tailObjects.Add(Instantiate(TailPrefab, newTailPos, Quaternion.identity));
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    public int GetCountOfTail()
+    {
+        return tailObjects.Count;
+    }
+
+    public GameObject TargetForNewTail()
+    {
+        return tailObjects[GetCountOfTail() - 2];
     }
 }

@@ -2,19 +2,22 @@
 
 public class Tail : MonoBehaviour
 {
+    private GameObject tailTargetObj;
+    private Snake snake;
+
     private float speed;
     private Vector3 tailTarget;
     private float tailSpeed = 2.5f;
     private int indx;
-    private GameObject tailTargetObj;
-    private Snake snake;
 
     void Start()
     {
         snake = GameObject.FindGameObjectWithTag("Snake").GetComponent<Snake>();
-        speed = snake.Speed + tailSpeed;
-        tailTargetObj = snake.tailObjects[snake.tailObjects.Count - 2];
-        indx = snake.tailObjects.IndexOf(gameObject);
+        speed = snake.GetSpeed() + tailSpeed;
+
+        tailTargetObj = snake.TargetForNewTail();
+
+        indx = snake.GetCountOfTail();
     }
 
     void Update()

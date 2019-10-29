@@ -10,17 +10,17 @@ public class FoodGenerator : MonoBehaviour
     private Vector3 currentPosition;
     private GameObject currentFood;
 
-    void AddNewFood()
-    {
-        currentPosition = new Vector3(Random.Range(XSize * -1, XSize), yHeight, Random.Range(ZSize * -1, ZSize));
-        currentFood = GameObject.Instantiate(foodPrefab, currentPosition, Quaternion.identity);
-    }
-
     void Update()
     {
         if (!currentFood)
         {
             AddNewFood();
         }
+    }
+
+    void AddNewFood()
+    {
+        currentPosition = new Vector3(Random.Range(XSize * -1, XSize), yHeight, Random.Range(ZSize * -1, ZSize));
+        currentFood = GameObject.Instantiate(foodPrefab, currentPosition, Quaternion.identity);
     }
 }
